@@ -89,7 +89,7 @@ class ProfileScreen extends StatelessWidget {
       backgroundColor: Colors.blue,
       centerTitle: true,
       title: const Text(
-        "My Profile",
+        " My Profile ",
         style: TextStyle(
           color: Colors.white,
           fontSize: 30,
