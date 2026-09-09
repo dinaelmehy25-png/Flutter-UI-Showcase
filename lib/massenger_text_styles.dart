@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class WhatsappTextStyles {
+abstract class MassengerTextStyles {
   static const titleTextStyle = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.bold,
