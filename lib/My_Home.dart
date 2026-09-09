@@ -1,220 +1,218 @@
-  import 'package:flutter/material.dart';
-
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'whatsapp_text_styles.dart';
+import 'chat_model.dart';
+import 'api_list.dart';
 class Myhome extends StatelessWidget {
   const Myhome({super.key});
 
   @override
   Widget build(BuildContext context) {
+     List<ChatModel> chats = apiChats.map((e) => ChatModel.fromJson(e)).toList();
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-        title: Text("Exercises"),
-        leading: Icon(Icons.menu),
-        actions: [
-          Icon(Icons.notifications_none),
-          SizedBox(width: 15),
-        ],    
+      appBar: _appBar(),
+      floatingActionButton: Column(
+  mainAxisSize: MainAxisSize.min,
+  children: [
+      FloatingActionButton(
+      onPressed: null,
+      backgroundColor: const Color(0xff202529),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
       ),
+      child: const Icon(
+        Icons.smart_toy,
+        color: Colors.purple,
+      ),
+    ),
 
-      body: SingleChildScrollView(
+         SizedBox(height: 15),
+
+       FloatingActionButton(
+        onPressed: null,
+        backgroundColor: Colors.green,
+        shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ), 
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(5),
+          ),         
+          child: Icon(
+            Icons.add, 
+            color: Colors.green,
+            )
+          ),
+      ),
+  ] ),
+
+       body: Padding(
+        padding: EdgeInsets.all(4),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
-            Padding(
-              padding: EdgeInsets.all(20),
-             
-              child: Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Hello, dondon! ",
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                  
-                      SizedBox(height: 10),
-                  
-                      Text(
-                        "Complete your exercises\n and keep learning,Baby",
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: const Color.fromARGB(255, 18, 109, 116),
-                        ),
-                      ),
-                    ],
-                  ),
-               SizedBox(width: 20),
-                CircleAvatar(
-                radius: 45,
-                backgroundImage: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1mhOkgKRfjmtdpciTGwWHhCc-qQt9TlVtL5GdvZa4-HU8O5uJjtEJzd0&s"), 
-              ),
-                ], 
-              ),
-            ),
+      // Search Bar
+      Padding(
+        padding: const EdgeInsets.all(10),
 
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                "Your Exercises",
+        child: Container(
+          height: 40,
+          width: double.infinity,
+
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20,
+          ),
+
+          decoration: BoxDecoration(
+            color:  Color(0xff252A2D),
+            borderRadius: BorderRadius.circular(30),
+          ),
+
+          child: Row(
+            children: [
+
+              // Search Icon
+              Icon(
+                Icons.search,
+                color: Colors.grey,
+                size: 35,
+              ),
+
+             SizedBox(width: 15),
+
+              // Search Text
+              Text(
+                "Ask Meta AI or Search",
                 style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue,
+                  color: Colors.grey,
+                  fontSize: 20,
                 ),
               ),
-            ),
-
-            SizedBox(height: 15),
-
-            exerciseItem(
-              Icons.code,
-              "Flutter Basics",
-              "Understand widgets and build\nyour first UI",
-              "Completed",
-            ),
-
-            exerciseItem(
-              Icons.phone_android,
-              "Layout Widgets",
-              "Practice Column, Row, Container\nand more",
-              "In Progress",
-            ),
-
-            exerciseItem(
-              Icons.image,
-              "Image & Icons",
-              "Use NetworkImage and\nIcon widgets",
-              "Not Started",
-            ),
-
-            exerciseItem(
-              Icons.text_fields,
-              "Text & Styling",
-              "Work with Text widget and\ntext styles",
-              "Not Started",
-            ),
-
-            exerciseItem(
-              Icons.star_border,
-              "Divider & Padding",
-              "Add spacing and dividers\nto your UI",
-              "Not Started",
-            ),
-          ],
-        ),
+            ],
+          ),
+        ),  
       ),
 
+     Padding(
+      padding: const EdgeInsets.all(10),
+     child: Row(
+       spacing: 20,
+        crossAxisAlignment: .start,
+        children: [
+           Icon(Icons.archive_outlined, color: Colors.grey),
+        Text("Archived", style:TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: Colors.grey, 
+        )
+        ),
+        Spacer(),
+        Text("1",
+       style: WhatsappTextStyles.msgTextStyle,
+      ),
+        ],
+     ),
+      ),
+      Expanded(
+              child: ListView.separated(
+                itemCount: chats.length,
+                separatorBuilder: (context, index) => SizedBox(height: 10,),
+                itemBuilder: (context, i) => _myChat(chats[i]),
+              ),
+            ),
+    ],
+  ),
+       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: const Color(0xff0B141A), 
         currentIndex: 1,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: Colors.green,
+        unselectedItemColor:Colors.white,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
+            icon: Icon(Icons.chat_outlined),
+            label: "Chats",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.assignment),
-            label: "Exercises",
+            icon: Icon(Icons.update_outlined),
+            label: "Updates",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.bar_chart),
-            label: "Progress",
+            icon: Icon(Icons.groups_outlined),
+            label: "Communities",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "Profile",
+            icon: Icon(Icons.call_outlined),
+            label: "Calls",
           ),
         ],
       ),
     );
   }
 
-  Widget exerciseItem(
-    IconData icon,
-    String title,
-    String description,
-    String status,
-  ) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        children: [
-          Divider(),
-
-          Row(
+  AppBar _appBar() {
+    return AppBar(
+      backgroundColor: Color(0xff202C33),
+      foregroundColor: Colors.white,
+      title: Text("WhatsApp"),
+      centerTitle: false,
+       actions: [
+        Icon(Icons.camera_alt_outlined),
+        SizedBox(width: 15),
+        Icon(Icons.more_vert),
+        SizedBox(width: 5),
+      ], 
+    );
+  }
+  Widget _myChat(ChatModel chat) {
+    return Row(
+      spacing: 10,
+      crossAxisAlignment: .start,
+      children: [
+        CircleAvatar(
+          radius: 30,
+          backgroundImage: NetworkImage(chat.image ?? ""),
+        ),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: .start,
             children: [
-
-              CircleAvatar(
-                radius: 40,
-                backgroundColor: Colors.blue.shade50,
-                child: Icon(
-                  icon,
-                  size: 35,
-                  color: Colors.blue,
-                ),
-              ),
-
-              SizedBox(width: 20),
-
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-
-                    SizedBox(height: 5),
-
-                    Text(
-                      description,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(width: 8),
-
-              Column(
-                children: [
-                  Text(
-                    status,
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 13,
-                    ),
-                  ),
-
-                  SizedBox(height: 10),
-
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    size: 20,
-                  ),
-                ],
-              ),
+          
+              Text(chat.name ?? "", style: WhatsappTextStyles.titleTextStyle),
+              _messageBuilder(chat),
+          
             ],
           ),
-                              
-          SizedBox(height: 10),
-        ],
-      ),
+        ),
+        Spacer(),
+        Text(chat.time ?? "", style: WhatsappTextStyles.msgTextStyle),
+      ],
     );
- } 
-}              
+  }
+  
+  Widget _messageBuilder(ChatModel chat) {
+    if (chat.messageType == ChatType.text) {
+      return Text(chat.message ?? "", style: WhatsappTextStyles.msgTextStyle,maxLines: 1, overflow: TextOverflow.ellipsis);
+    } else if (chat.messageType == ChatType.video) {
+      return Row(
+        children: [
+          Icon(CupertinoIcons.video_camera),
+          Text("Video", style: WhatsappTextStyles.msgTextStyle),
+        ],
+      );
+    } else {
+      return Row(
+        children: [
+          Icon(Icons.gif),
+          Text("Gif", style: WhatsappTextStyles.msgTextStyle),
+        ],
+      );
+    }
+  }
+}
 
+ 
 
+ 
