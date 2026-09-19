@@ -1,17 +1,28 @@
-# exercise_app
+# Flutter UI Showcase
 
-A new Flutter project.
+A curated collection of modern, responsive, and pixel-perfect mobile application UI screens built using **Flutter** and **Dart**. This repository demonstrates various layout techniques, custom styling, and clean UI architecture.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 📱 Featured Screens
 
-A few resources to get you started if this is your first Flutter project:
+- 🔐 **Login Page UI:** Clean authentication screen with input validation layouts.
+- 💬 **Messenger Screen UI:** Modern chat interface with dynamic message listing.
+- 🟢 **WhatsApp Screen UI:** Popular messaging app clone featuring tab bar navigation and list tiles.
+- 🏋️‍♂️ **Add Exercise Screen:** Interactive form UI for fitness and workout tracking apps.
+- 👤 **Profile Screen:** Personal user dashboard featuring avatar headers and options lists.
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🛠️ Tech Stack & Concepts Applied
+
+- **Framework:** Flutter
+- **Language:** Dart
+- **UI & Layouts:** Flex, Columns, Rows, Expanded, Custom Containers, ListViews, and Custom Themes.
+- **State Management & Navigation:** Clean modular code structure.
+
+---
+
+## 👤 Developer
+
+Developed with ❤️ by **Dina El-Mehy**
