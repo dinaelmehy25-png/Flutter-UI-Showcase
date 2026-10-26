@@ -17,27 +17,25 @@ class PostsPage extends StatelessWidget {
      body:BlocBuilder<PostsCubit,PostsState>(
         builder: (context, state) {
           final cubit=context.read<PostsCubit>();
-          // 1. لو الحالة لسه بتحمل
+
           if (state is PostsLoadingState){
             return Center(
               child: CircularProgressIndicator(),
             );
           } 
-          // 2. لو حصل إيرور
+
           else if (state is PostsErrorState) {
             return Center(
               child: Text('There\'s an error'),
             );
           } 
           
-          // 3. لو الداتا رجعت بنجاح (هنا بنعرض الـ ListView)
-          // ملاحظة: تأكدي إن اسم القائمة عندك في الـ Cubit هو نفسه (apiList أو المسمى اللي مدياتيه)
           return ListView.builder(
-            itemCount: cubit.posts.length, // أو الـ list اللي جاية من الـ state
+            itemCount: cubit.posts.length, 
             itemBuilder: (context, index) {
               final post = cubit.posts[index];
               return ListTile(
-                title: Text(post.title ?? ''), // أو user.name على حسب الـ Model
+                title: Text(post.title ?? ''), 
                 subtitle: Text(post.body ?? ''),
               );
             },
