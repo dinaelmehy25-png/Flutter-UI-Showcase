@@ -1,5 +1,7 @@
+import 'package:exercise_app/cubit/posts_cubit.dart';
 import 'package:flutter/material.dart';
-import 'Login_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'views/posts_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +19,10 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         scaffoldBackgroundColor: const Color(0xFFF5F5F5),
       ),
-      home: const SignUpPage(),
+      home: BlocProvider(
+        create: (context) => PostsCubit()..fetchPosts(),
+        child: const PostsPage(),
+      ),
     );
   }
 }
