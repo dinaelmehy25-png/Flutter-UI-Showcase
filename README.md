@@ -1,28 +1,20 @@
-# Flutter UI Showcase
+# Login with Firebase (MVVM)
 
-A curated collection of modern, responsive, and pixel-perfect mobile application UI screens built using **Flutter** and **Dart**. This repository demonstrates various layout techniques, custom styling, and clean UI architecture.
+Flutter + MVVM + Firebase Authentication + Firebase Remote Config.
 
----
+## Setup (Windows)
+1. Unzip to a short path on drive C:, e.g. C:\dev\loginwithfirebase
+2. Copy lib\firebase_options.dart from your old project into lib\
+   (or run `flutterfire configure` in this folder).
+3. Double-click setup.bat (or run it from cmd in this folder).
+4. Start the emulator and run `flutter run`.
 
-## 📱 Featured Screens
+## Firebase console
+- Authentication > Sign-in method > enable Email/Password
+- Remote Config > add String parameters `welcome_message` and `button_text` > Publish
 
-- 🔐 **Login Page UI:** Clean authentication screen with input validation layouts.
-- 💬 **Messenger Screen UI:** Modern chat interface with dynamic message listing.
-- 🟢 **WhatsApp Screen UI:** Popular messaging app clone featuring tab bar navigation and list tiles.
-- 🏋️‍♂️ **Add Exercise Screen:** Interactive form UI for fitness and workout tracking apps.
-- 👤 **Profile Screen:** Personal user dashboard featuring avatar headers and options lists.
-
----
-
-## 🛠️ Tech Stack & Concepts Applied
-
-- **Framework:** Flutter
-- **Language:** Dart
-- **UI & Layouts:** Flex, Columns, Rows, Expanded, Custom Containers, ListViews, and Custom Themes.
-- **State Management & Navigation:** Clean modular code structure.
-
----
-
-## 👤 Developer
-
-Developed with ❤️ by **Dina El-Mehy**
+## What setup.bat does
+- `flutter create .` adds android/ios/web folders for your Flutter version (keeps existing files)
+- sets minSdk 23 and kotlin.incremental=false
+- upgrades packages to the latest compatible versions
+- cleans old builds
